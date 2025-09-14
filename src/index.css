@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Early.fit Doctor Profile Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Early.fit Brand Colors */
+    --color-bg: 0 0% 100%;
+    --color-ink: 210 15% 25%;
+    --color-accent: 145 25% 55%;
+    --color-ink-muted: 210 10% 45%;
+    --color-success: 145 60% 50%;
+    --color-warning: 35 95% 55%;
+    --color-error: 0 75% 55%;
+    
+    /* Clinical UI Colors */
+    --background: var(--color-bg);
+    --foreground: var(--color-ink);
+    --card: 0 0% 100%;
+    --card-foreground: var(--color-ink);
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--color-ink);
+    
+    /* Primary system */
+    --primary: var(--color-accent);
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 145 25% 50%;
+    
+    /* Secondary system */
+    --secondary: 210 15% 96%;
+    --secondary-foreground: var(--color-ink);
+    --secondary-hover: 210 15% 92%;
+    
+    /* Muted system */
+    --muted: 210 10% 96%;
+    --muted-foreground: var(--color-ink-muted);
+    
+    /* Accent system */
+    --accent: var(--color-accent);
+    --accent-foreground: 0 0% 100%;
+    
+    /* Status colors */
+    --destructive: var(--color-error);
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders and inputs */
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: var(--color-accent);
+    
+    /* Clinical spacing and radii */
+    --radius-card: 16px;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    
+    /* Shadows - clinical and soft */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.12);
+    
+    /* Transitions */
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .dark {
+    /* Dark mode tokens - maintaining clinical feel */
+    --background: 220 15% 8%;
+    --foreground: 210 15% 92%;
+    --card: 220 15% 10%;
+    --card-foreground: 210 15% 92%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 210 15% 92%;
+    --primary: 145 25% 60%;
+    --primary-foreground: 220 15% 8%;
+    --secondary: 220 10% 15%;
+    --secondary-foreground: 210 15% 92%;
+    --muted: 220 10% 15%;
+    --muted-foreground: 210 10% 65%;
+    --accent: 145 25% 60%;
+    --accent-foreground: 220 15% 8%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 210 15% 92%;
+    --border: 220 10% 20%;
+    --input: 220 10% 20%;
+    --ring: 145 25% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  /* Custom clinical components */
+  .clinical-card {
+    @apply bg-card border border-border/50 rounded-2xl p-6;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .clinical-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .clinical-button-primary {
+    @apply bg-primary text-primary-foreground rounded-xl px-6 py-3 font-medium;
+    @apply hover:bg-primary-hover focus:ring-2 focus:ring-primary/20;
+    transition: var(--transition-smooth);
+  }
+
+  .clinical-button-secondary {
+    @apply bg-secondary text-secondary-foreground rounded-xl px-6 py-3 font-medium;
+    @apply hover:bg-secondary-hover focus:ring-2 focus:ring-primary/20;
+    transition: var(--transition-smooth);
+  }
+
+  .clinical-chip {
+    @apply bg-muted text-muted-foreground rounded-full px-3 py-1 text-sm font-medium;
+    transition: var(--transition-smooth);
+  }
+
+  .clinical-chip:hover {
+    @apply bg-primary/10 text-primary;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles */
+  .focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* 3D Card Flip Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Custom scrollbar hide */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Snap scroll for horizontal cards */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  /* Focus ring for accessibility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
