@@ -22,7 +22,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
   };
 
   return (
-    <section className="relative overflow-hidden w-full">
+    <section className="relative overflow-hidden w-full ">
       {/* Desktop Version */}
       <div className="hidden lg:block relative w-full bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
         {/* Blurred Background Image - Full Width */}
@@ -45,7 +45,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
             <div className="absolute inset-0 bg-slate-900/50 z-0"></div>
 
             {/* Left Side - Doctor Details */}
-            <div className="text-white space-y-8 z-10 h-full flex flex-col justify-center min-w-1/2">
+            <div className="text-white space-y-8 z-10 h-full flex flex-col justify-center min-w-1/2 mx-auto">
               {/* Main Heading */}
               <div className='lg:text-start w-full'>
                 <h1 className="text-3xl w-full font-bold mb-4 leading-tight" style={{ color: '#fff4e2' }}>
@@ -158,25 +158,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
       </div>
 
       {/* Mobile Version */}
-      <div className="lg:hidden relative min-h-screen w-full">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${portraitHeroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        />
-
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/60"></div>
-
+      <div className="lg:hidden relative w-full">
         {/* Mobile Content */}
-        <div className="relative z-10 w-full h-screen flex flex-col justify-between px-6 py-8">
+        <div className="relative z-10 w-full grid grid-cols-2 items-end px-6 min-h-[40vh]">
           {/* Top Content */}
-          <div className="flex-1 flex flex-col justify-center">
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+            style={{
+              backgroundImage: `url(${portraitHeroImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60 z-0"></div>
+          <div className="flex-1 flex flex-col justify-center z-10">
             {/* Doctor Name */}
             <h1 className="text-white text-3xl md:text-4xl font-bold mb-4 leading-tight text-left">
               {doctor.name}
@@ -189,19 +186,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
           </div>
 
           {/* Doctor Image Overlay */}
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-8">
+          <div className="z-10">
             <img
               src={drSaptarshiImage}
               alt={`${doctor.name} - Profile Photo`}
-              className="w-48 h-48 object-cover rounded-lg shadow-2xl"
+              className="w-52 h-52 object-cover rounded-lg"
             />
           </div>
         </div>
 
         {/* Mobile Affiliations Bar */}
-        <div className="absolute bottom-0 left-0 right-0 w-full">
+        <div className="w-full">
           <div className="w-full">
-            <div className="grid grid-cols-1 divide-y divide-white/20">
+            <div className="flex bg-[#abb597] justify-around divide-y divide-white/20">
               {doctor.affiliations.map((affiliation, index) => {
                 const shades = ['#939f79', '#abb597', '#dbdfd2']; // Early green shades
                 const textColors = ['text-white', 'text-white', 'text-[#2C3E50]']; // White text for dark/medium, dark for light
@@ -211,11 +208,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                 return (
                   <div
                     key={affiliation.hospital}
-                    className="flex items-center p-4 min-h-[120px]"
+                    className="flex items-center w-full justify-center p-4 min-h-[120px]"
                     style={{ backgroundColor }}
                   >
                     {/* Hospital logo */}
-                    <div className="flex-shrink-0 mr-4">
                       <div className={`w-16 h-16 rounded-xl overflow-hidden shadow-lg ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
                         <img
                           src={logoMap[affiliation.hospital] || affiliation.logo}
@@ -223,10 +219,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                           className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain p-2' : 'object-cover'}`}
                         />
                       </div>
-                    </div>
 
                     {/* Hospital details */}
-                    <div className={`flex-1 ${textColor}`}>
+                    {/* <div className={`flex-1 ${textColor}`}>
                       <h3 className="font-bold text-lg mb-1">{affiliation.hospital}</h3>
                       <p className="text-sm mb-2">{affiliation.role}</p>
                       {affiliation.current && (
@@ -237,7 +232,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                           Current
                         </Badge>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}

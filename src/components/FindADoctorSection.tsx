@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Stethoscope } from 'lucide-react';
 import { DoctorProfile } from '@/data/doctorProfile';
 
@@ -17,6 +18,7 @@ interface DoctorCard {
 }
 
 export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doctor }) => {
+  const navigate = useNavigate();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
 
@@ -50,7 +52,7 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const cardWidth = 300; // Card width + gap
+      const cardWidth = 350; // Card width + gap
       const scrollAmount = cardWidth;
       const currentScroll = carouselRef.current.scrollLeft;
       const targetScroll = direction === 'left' 
@@ -90,24 +92,24 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative ">
           {/* Left Arrow */}
-          <button
+          {/* <button
             onClick={() => scrollCarousel('left')}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-[#E4E7DF] flex items-center justify-center text-[#434A35] hover:text-[#2E3523] hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-5 w-5" />
-          </button>
+          </button> */}
 
           {/* Right Arrow */}
-          <button
+          {/* <button
             onClick={() => scrollCarousel('right')}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-[#E4E7DF] flex items-center justify-center text-[#434A35] hover:text-[#2E3523] hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-5 w-5" />
-          </button>
+          </button> */}
 
           {/* Carousel */}
           <div 
@@ -118,9 +120,9 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
             {doctors.map((doctorCard) => (
               <div
                 key={doctorCard.id}
-                className="w-full"
+                className="min-w-full md:min-w-fit md:w-full"
               >
-                <div className="bg-white border border-[#E4E7DF] rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl hover:border-[#939F79] transition-all duration-200 focus-within:ring-2 focus-within:ring-[#939F79] focus-within:ring-offset-2 group cursor-pointer relative">
+                <div onClick={()=> navigate(doctorCard.profileUrl)} className="bg-white border border-[#E4E7DF] rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:border-[#939F79] transition-all duration-200 focus-within:ring-2 focus-within:ring-[#939F79] focus-within:ring-offset-2 group cursor-pointer relative">
                   {/* Photo */}
                   <div className="relative w-full h-80 bg-gray-100 overflow-hidden">
                     {/* Department badge removed as requested */}
@@ -132,7 +134,7 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
                     <img
                       src={doctorCard.photo}
                       alt={`Dr. ${doctorCard.name} portrait`}
-                      className="w-full h-full object-fill transition-transform duration-200 group-hover:scale-105"
+                      className="w-full h-full object-cover md:object-contain bg-[#dbdfd2] transition-transform duration-200 group-hover:scale-105"
                       onLoad={() => handleImageLoad(doctorCard.id)}
                       onError={() => handleImageError(doctorCard.id)}
                       loading="lazy"
@@ -150,11 +152,11 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
                   </div>
 
                   {/* Clickable Overlay */}
-                  <a
+                  {/* <a
                     href={doctorCard.profileUrl}
                     className="absolute inset-0 z-20"
                     aria-label={`Open profile: ${doctorCard.name}, ${doctorCard.designation}`}
-                  />
+                  /> */}
                 </div>
               </div>
             ))}

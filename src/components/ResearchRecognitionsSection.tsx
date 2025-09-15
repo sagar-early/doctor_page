@@ -103,7 +103,7 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
     .sort((a, b) => b - a);
 
   return (
-    <section id={id} className="w-full bg-gradient-to-b from-[#434a35] to-[#393f2d] py-12 md:py-16">
+    <section id={id} className="w-full bg-gradient-to-b from-[#faf8f1] to-[#393f2d] py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">

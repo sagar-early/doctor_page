@@ -68,7 +68,7 @@ export const FAQSection = () => {
   };
 
   return (
-    <section className="py-6 px-4 lg:px-16" style={{ backgroundColor: '#FAF8F1' }}>
+    <section className="py-6 px-4 lg:px-16">
       <div className="max-w-6xl mx-auto">
         <div className="lg:flex lg:gap-12">
           {/* Left Column - 30% width on desktop */}
