@@ -124,14 +124,7 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
                 <div className="bg-white border border-[#E4E7DF] rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl hover:border-[#939F79] transition-all duration-200 focus-within:ring-2 focus-within:ring-[#939F79] focus-within:ring-offset-2 group cursor-pointer relative">
                   {/* Photo */}
                   <div className="relative w-full h-64 bg-gray-100 overflow-hidden">
-                    {/* Department Badge - Fixed positioning */}
-                    {doctorCard.department && (
-                      <div className="absolute top-3 left-3 z-20">
-                        <span className="bg-[#DBDFD2] text-[#939F79] text-xs font-semibold px-3 py-1 rounded-full shadow-sm border border-[#939F79]/20">
-                          {doctorCard.department}
-                        </span>
-                      </div>
-                    )}
+                    {/* Department badge removed as requested */}
                     {isLoading[doctorCard.id] !== false && (
                       <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
                         <div className="w-16 h-16 bg-gray-300 rounded-full"></div>

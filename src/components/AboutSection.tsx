@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Award, GraduationCap, Calendar, Stethoscope, BookOpen, Mic, Users, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { GraduationCap, Calendar, Stethoscope, BookOpen, Users } from 'lucide-react';
 import { DoctorProfile } from '@/data/doctorProfile';
 
 interface AboutSectionProps {
@@ -9,11 +7,19 @@ interface AboutSectionProps {
   doctor: DoctorProfile;
 }
 
+type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+interface AboutPoint {
+  icon: IconComponentType;
+  title: string;
+  content: string;
+  highlight: string;
+  highlightColor?: string;
+}
+
 export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
-  const [expandedQual, setExpandedQual] = useState<number | null>(null);
 
   // Extract key information from the about text
-  const aboutPoints = [
+  const aboutPoints: AboutPoint[] = [
     {
       icon: Calendar,
       title: "Experience",
@@ -31,19 +37,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
       title: "Research & Publications",
       content: "100+ scientific publications in peer-reviewed journals",
       highlight: "100+ publications"
-    },
-    {
-      icon: Award,
-      title: "Recognition",
-      content: "Excellence in Endocrinology Award and Best Research Paper recognition",
-      highlight: "Award-winning",
-      highlightColor: "#FF9800"
-    },
-    {
-      icon: Mic,
-      title: "Public Awareness",
-      content: "Regular TV appearances and newspaper contributions for health education",
-      highlight: "Media expert"
     },
     {
       icon: Users,
@@ -79,9 +72,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
                   <IconComponent className="h-6 w-6 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-foreground mb-2 text-lg">
-                    {point.title}
-                  </h3>
                   <p className="text-foreground leading-relaxed">
                     {point.content.split(point.highlight).map((part, i) => (
                       <span key={i}>
@@ -104,116 +94,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
         })}
       </div>
 
-      {/* Educational Qualifications - Clean LinkedIn Style */}
-      <div className="bg-white rounded-xl p-6 space-y-8">
-        <h3 className="font-bold text-[#2E3523] flex items-center gap-3 text-xl">
-          <GraduationCap className="h-6 w-6 text-[#939F79]" />
-          Educational Qualifications
-        </h3>
-        
-        <div className="space-y-8">
-          {/* Entry 1 - AIIMS DM */}
-          <div className="bg-white border border-[#E4E7DF] rounded-xl shadow-sm p-4 md:p-6">
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-              {/* Left - Logo Column (64px fixed width) */}
-              <div className="w-full md:w-16 flex-shrink-0 flex items-center justify-center md:justify-start">
-                <div className="w-16 h-16 rounded-lg overflow-hidden bg-white border border-[#E4E7DF] flex items-center justify-center">
-                  <img 
-                    src="/src/assets/AIIMS_logo.png" 
-                    alt="AIIMS logo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Right - Details Column */}
-              <div className="flex-1 min-w-0 text-center md:text-left">
-                <div className="space-y-3">
-                  {/* Degree */}
-                  <h4 className="font-bold text-[#2E3523] text-lg leading-tight">
-                    Doctorate in Medicine (DM), Endocrinology
-                  </h4>
-                  
-                  {/* Institution */}
-                  <p className="font-semibold text-[#4A4F46] text-base">
-                    All India Institute of Medical Sciences (AIIMS), New Delhi
-                  </p>
-                  
-                  {/* Duration */}
-                  <p className="text-[#6B6F66] text-sm font-medium">
-                    Jan 2008 – Dec 2010
-                  </p>
-
-                  {/* Short Blurb */}
-                  <p className="text-[#4A4F46] text-base leading-relaxed">
-                    A 3-year super-specialty program for MD (Internal Medicine) physicians, providing advanced training in diagnosis and management of endocrine disorders.
-                  </p>
-
-                  {/* Expandable Details */}
-                  <div className="mt-4">
-                    <div className={`transition-all duration-250 overflow-hidden ${
-                      expandedQual === 0 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}>
-                      <ul className="space-y-2 text-[#4A4F46] text-sm">
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Disorders of pituitary, thyroid, parathyroid, and adrenal glands</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Diabetes mellitus: type 1, type 2, monogenic, secondary, gestational</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Obesity and metabolic syndrome</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Calcium & bone metabolism: osteoporosis, rickets, osteomalacia</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Disorders of sexual development and reproduction</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Endocrine hypertension</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Endocrine tumors (e.g., pheochromocytoma, paraganglioma, MEN syndromes)</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-[#939F79] mt-1">•</span>
-                          <span>Genetic & syndromic endocrine disorders</span>
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    {/* Show More/Less Toggle */}
-                    <button
-                      onClick={() => setExpandedQual(expandedQual === 0 ? null : 0)}
-                      className="mt-3 flex items-center gap-1 text-[#4CAF50] hover:text-[#45a049] font-medium text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/20 focus:ring-offset-2 rounded"
-                    >
-                      {expandedQual === 0 ? (
-                        <>
-                          <span>Show Less</span>
-                          <ChevronUp className="h-4 w-4" />
-                        </>
-                      ) : (
-                        <>
-                          <span>Show More</span>
-                          <ChevronDown className="h-4 w-4" />
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Educational Qualifications section removed */}
     </section>
   );
 };

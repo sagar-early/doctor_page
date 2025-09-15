@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { ClinicalButton } from '@/components/ui/clinical-button';
-import { BookOpen, Award, Copy, ExternalLink, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpen, Award, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
 import { DoctorProfile } from '@/data/doctorProfile';
-import { useToast } from '@/hooks/use-toast';
 
 interface ResearchRecognitionsSectionProps {
   id: string;
@@ -23,7 +21,6 @@ interface TimelineEntry {
 }
 
 export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionProps> = ({ id, doctor }) => {
-  const { toast } = useToast();
   const [expandedCitation, setExpandedCitation] = useState<string | null>(null);
 
   // Combine and organize all entries by year
@@ -87,14 +84,6 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
     }
   ];
 
-  const handleCopyCitation = (citation: string) => {
-    navigator.clipboard.writeText(citation);
-    toast({
-      title: "Citation copied!",
-      description: "The citation has been copied to your clipboard.",
-    });
-  };
-
   const toggleCitation = (entryId: string) => {
     setExpandedCitation(expandedCitation === entryId ? null : entryId);
   };
@@ -142,38 +131,10 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
                     const entryId = `${year}-${entryIndex}`;
                     return (
                       <div key={entryId} className={`flex flex-col md:flex-row items-center md:items-start gap-6 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                        {/* Timeline Circle Icon */}
-                        <div className="flex-shrink-0 w-12 h-12 bg-[#939F79] rounded-full border-4 border-[#434a35] flex items-center justify-center shadow-lg shadow-[#939F79]/30 hidden md:flex">
-                          {entry.type === 'publication' ? (
-                            <BookOpen className="h-5 w-5 text-white" />
-                          ) : (
-                            <Award className="h-5 w-5 text-white" />
-                          )}
-                        </div>
-
-                        {/* Year Badge - Next to circle icon */}
-                        <div className={`flex-shrink-0 ${isLeft ? 'md:order-1' : 'md:order-3'}`}>
-                          <div className="bg-[#939F79] text-white font-bold text-sm px-4 py-2 rounded-full shadow-md">
-                            {year}
-                          </div>
-                        </div>
-
-                        {/* Mobile Circle Icon and Year Badge */}
-                        <div className="md:hidden flex items-center gap-4 mb-4">
-                          <div className="w-10 h-10 bg-[#939F79] rounded-full border-2 border-[#434a35] flex items-center justify-center shadow-md">
-                            {entry.type === 'publication' ? (
-                              <BookOpen className="h-4 w-4 text-white" />
-                            ) : (
-                              <Award className="h-4 w-4 text-white" />
-                            )}
-                          </div>
-                          <div className="bg-[#939F79] text-white font-bold text-sm px-3 py-1 rounded-full shadow-md">
-                            {year}
-                          </div>
-                        </div>
+                        {/* Timeline left icon and year badge removed as requested */}
 
                         {/* Entry Card */}
-                        <div className={`w-full md:w-[45%] ${isLeft ? 'md:pr-8 md:order-3' : 'md:pl-8 md:order-1'}`}>
+                        <div className={`w-full md:w-[45%] ${isLeft ? 'md:order-3' : 'md:order-1'}`}>
                           <div className={`bg-white rounded-xl shadow-lg p-5 border border-[#E4E7DF] relative hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group`}>
                             {/* Accent Stripe */}
                             <div className={`absolute top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1 rounded-l-xl ${entry.type === 'publication' ? 'bg-[#4CAF50] group-hover:shadow-lg group-hover:shadow-[#4CAF50]/30' : 'bg-[#FF9800] group-hover:shadow-lg group-hover:shadow-[#FF9800]/30'}`}></div>
@@ -241,36 +202,7 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
                                   </div>
                                 )}
 
-                                {/* Actions */}
-                                <div className="flex items-center gap-3 mt-4">
-                                  {entry.citation && (
-                                    <button
-                                      onClick={() => handleCopyCitation(entry.citation!)}
-                                      className="text-[#4CAF50] hover:text-[#45a049] font-medium text-sm flex items-center gap-1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#4CAF50]/20 focus:ring-offset-2 rounded"
-                                    >
-                                      <Copy className="h-4 w-4" />
-                                      Copy Citation
-                                    </button>
-                                  )}
-                                  {entry.url && (
-                                    <ClinicalButton
-                                      variant="outline"
-                                      size="sm"
-                                      className="border-[#4CAF50] text-[#4CAF50] hover:bg-[#4CAF50] hover:text-white transition-all duration-200"
-                                      asChild
-                                    >
-                                      <a
-                                        href={entry.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-2"
-                                      >
-                                        <ExternalLink className="h-4 w-4" />
-                                        View Publication
-                                      </a>
-                                    </ClinicalButton>
-                                  )}
-                                </div>
+                                {/* Actions removed as requested */}
                               </div>
                             </div>
                           </div>
