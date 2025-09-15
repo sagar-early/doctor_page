@@ -70,7 +70,7 @@ export interface DoctorProfile {
 
 export const drSaptarshiProfile: DoctorProfile = {
   name: "Dr. Saptarshi Bhattacharya",
-  title: "Chief Medical Advisor, Endocrinology",
+  title: "Chief Medical Advisor, EarlyFit",
   experience_years: 18,
   languages: ["English", "Hindi", "Bengali", "Telugu"],
   qualifications: [

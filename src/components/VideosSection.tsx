@@ -62,13 +62,13 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
       {/* Carousel Container */}
       <div className="relative px-0 md:px-4"> {/* Added horizontal padding */}
         {/* Gradient fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"></div>
 
         {/* Scrollable Video Row */}
         <div 
           ref={carouselRef}
-          className="flex overflow-x-scroll snap-x snap-mandatory gap-4 pb-4 no-scrollbar"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar"
         >
           {doctor.videos.map((video) => (
             <div 
@@ -141,7 +141,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                   </div>
                 </DialogTrigger>
                 
-                <DialogContent className="max-w-4xl p-0">
+                <DialogContent className="max-w-4xl p-0 max-h-full">
                   {selectedVideo && (
                     <div className="relative">
                       <div className="aspect-video bg-black rounded-t-lg flex items-center justify-center">
@@ -173,6 +173,9 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                           ))}
                         </div>
                       </div>
+                      <button className='p-2 rounded-full bg-white/90 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2 transition' onClick={() => setSelectedVideo(null)}>
+                        Next 
+                      </button>
                     </div>
                   )}
                 </DialogContent>

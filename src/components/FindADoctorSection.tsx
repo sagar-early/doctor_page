@@ -81,7 +81,7 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
           <div className="flex items-center justify-center gap-3 mb-4">
             <Stethoscope className="h-6 w-6 text-white" />
             <h2 className="text-2xl md:text-3xl font-bold text-white">
-              Meet Our Specialists
+               Meet Our Specialists
             </h2>
           </div>
           <p className="text-base text-[#DBDFD2] font-medium">
@@ -112,18 +112,17 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
           {/* Carousel */}
           <div 
             ref={carouselRef}
-            className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-4 px-8"
+            className="flex overflow-x-auto  gap-4 px-8"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {doctors.map((doctorCard) => (
               <div
                 key={doctorCard.id}
-                className="flex-shrink-0 snap-start"
-                style={{ width: '280px' }}
+                className="w-full"
               >
                 <div className="bg-white border border-[#E4E7DF] rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl hover:border-[#939F79] transition-all duration-200 focus-within:ring-2 focus-within:ring-[#939F79] focus-within:ring-offset-2 group cursor-pointer relative">
                   {/* Photo */}
-                  <div className="relative w-full h-64 bg-gray-100 overflow-hidden">
+                  <div className="relative w-full h-80 bg-gray-100 overflow-hidden">
                     {/* Department badge removed as requested */}
                     {isLoading[doctorCard.id] !== false && (
                       <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
@@ -133,7 +132,7 @@ export const FindADoctorSection: React.FC<FindADoctorSectionProps> = ({ id, doct
                     <img
                       src={doctorCard.photo}
                       alt={`Dr. ${doctorCard.name} portrait`}
-                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                      className="w-full h-full object-fill transition-transform duration-200 group-hover:scale-105"
                       onLoad={() => handleImageLoad(doctorCard.id)}
                       onError={() => handleImageError(doctorCard.id)}
                       loading="lazy"

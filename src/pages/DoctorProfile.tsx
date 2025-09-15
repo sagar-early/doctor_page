@@ -6,6 +6,7 @@ import { ResearchRecognitionsSection } from '@/components/ResearchRecognitionsSe
 import { FindADoctorSection } from '@/components/FindADoctorSection';
 import { FAQSection } from '@/components/FAQSection';
 import { drSaptarshiProfile } from '@/data/doctorProfile';
+import GetCallbackSection from '@/components/GetCallbackSection';
 
 const DoctorProfile: React.FC = () => {
   return (
@@ -33,10 +34,11 @@ const DoctorProfile: React.FC = () => {
         
         {/* FAQ Section */}
         <div className="container mx-auto px-4 py-8">
-          <FAQSection id="faq" doctor={drSaptarshiProfile} />
+          <FAQSection />
         </div>
-        
       </main>
+      {/* Get a Callback Section */}
+      <GetCallbackSection />
     </div>
   );
 };

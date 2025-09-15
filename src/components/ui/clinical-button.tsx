@@ -10,6 +10,7 @@ const clinicalButtonVariants = cva(
       variant: {
         primary: "clinical-button-primary",
         secondary: "clinical-button-secondary",
+        outline: "clinical-button-outline",
         hero: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-md hover:shadow-lg px-8 py-4 text-lg font-semibold",
         callback: "bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 font-semibold shadow-sm hover:shadow-md",
         ghost: "hover:bg-muted hover:text-foreground",
