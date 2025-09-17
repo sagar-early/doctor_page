@@ -113,9 +113,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
         <div className="w-full bg-white py-4">
           <div className="container mx-auto px-6">
             {/* Heading */}
-            <h3 className="text-center text-lg font-bold text-gray-900 mb-4">
+            {/* <h3 className="text-center text-lg font-bold text-gray-900 mb-4">
               Hospital Affiliations
-            </h3>
+            </h3> */}
             
             {/* Hospital Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">

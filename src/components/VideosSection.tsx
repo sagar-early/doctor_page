@@ -69,7 +69,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
   }
 
   return (
-    <section id={id} className="clinical-card bg-white p-6 md:p-8">
+    <section id={id} className="clinical-card bg-[#faf8f1] p-6 md:p-8">
       <div className="flex items-center justify-between mb-4">
         <div className="flex flex-col">
           <h2 className="text-2xl font-bold text-[#2E3523] flex items-center gap-3">
@@ -143,10 +143,10 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                       )}
 
                       {/* Bottom-Right Duration Pill */}
-                      <div className="absolute bottom-3 right-3 bg-[#2E3523] text-white text-xs font-medium px-3 py-1 rounded-full opacity-90">
+                      {/* <div className="absolute bottom-3 right-3 bg-[#2E3523] text-white text-xs font-medium px-3 py-1 rounded-full opacity-90">
                         <Clock className="h-3 w-3 inline-block mr-1" />
                         {video.duration}
-                      </div>
+                      </div> */}
 
                       {/* Mute/Unmute Icon on Hover (if playing) */}
                       {playingVideoId === video.id && (
@@ -214,7 +214,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                         
                         {/* Video Tags below the video controls */}
                         {doctor?.videos[selectedVideoIndex]?.tags && (
-                          <div className="absolute bottom-0 bg-black/70 w-full p-4 bg-gray-50 rounded-b-lg">
+                          <div className="absolute bottom-0 w-full p-4 bg-[#393f2d]/90 rounded-b-lg">
                             <div className="flex flex-wrap gap-2">
                               {doctor.videos[selectedVideoIndex].tags.map((tag: string, tagIndex: number) => (
                                 <Badge 

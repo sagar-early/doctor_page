@@ -47,12 +47,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
   ];
 
   return (
-    <section id={id} className="clinical-card">
-      <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-3">
-        <GraduationCap className="h-8 w-8 text-primary" />
+    <section id={id} className="clinical-card bg-[#faf8f1]">
+      <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-3 ">
+        <Stethoscope className="h-6 w-6" />
         About Dr. {doctor.name.split(' ').pop()}
       </h2>
-      
+
       {/* Short intro */}
       <p className="text-lg text-foreground mb-8 font-medium">
         A senior endocrinologist committed to delivering evidence-based, compassionate care with a focus on patient education and long-term outcomes.
@@ -77,7 +77,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
                       <span key={i}>
                         {part}
                         {i < point.content.split(point.highlight).length - 1 && (
-                          <span 
+                          <span
                             className="font-bold"
                             style={{ color: point.highlightColor || '#4CAF50' }}
                           >
