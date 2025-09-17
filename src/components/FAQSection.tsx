@@ -11,52 +11,33 @@ interface FAQ {
 const faqs: FAQ[] = [
   {
     id: 1,
-    question: "What is included in this Plan?",
+    question: "Who is Dr. Saptarshi Bhattacharya?",
     answer: (
       <div className="space-y-2">
-        <p>Your plan is a complete diagnostic package designed to give you clarity. It includes:</p>
-        <ul className="list-disc list-inside ml-4 space-y-1">
-          <li>A Full Body Blood Test (at home)</li>
-          <li>A 1-on-1 Video Consultation with an Endocrinologist</li>
-          <li>A Personal Counseling Session with a Nutritionist</li>
-          <li>A 7-Day Starter Meal Plan</li>
-        </ul>
+        <p>Dr. Saptarshi Bhattacharya is a highly experienced Endocrinologist with 15 years of expertise in the field. He is known for providing exceptional patient care and advanced medical treatments. He areas of expertise include Type 1 Diabetes Treatment. He also treats conditions such as Parathyroid Diseases, pituitary-diseases.</p>
+        
       </div>
     )
   },
   {
     id: 2,
-    question: "Who are Endocrinologists and why do I need one?",
-    answer: "Endocrinologists are super-specialist doctors who are experts in hormones. Hormones control your metabolism, hunger, and how your body stores fat. Our endocrinologists will use your test results to find the hormonal root cause of your weight gain and create a medical plan that works with your body's biology."
+    question: "Why do patients choose Dr. Saptarshi Bhattacharya?",
+    answer: "Patients trust Dr. Saptarshi Bhattacharya for he expertise, patient-centric approach, and commitment to providing the highest standard of care. He is well-versed in the latest medical advancements and ensures personalized treatment for every patient."
   },
   {
     id: 3,
-    question: "How do I get started after I pay?",
+    question: "What is Dr. Saptarshi Bhattacharya’s specialization?",
     answer: "The process is simple and we guide you every step of the way. After your purchase, one of our Care Coordinators will reach out to you on WhatsApp within a few hours to confirm your details and schedule a convenient time for your at-home blood test."
   },
   {
     id: 4,
-    question: "What are the next steps after my diagnosis?",
-    answer: (
-      <div className="space-y-4">
-        <p>Your diagnosis is the essential first step on your path to sustainable weight loss. It provides the medical blueprint for your journey. Based on your results, your doctor will recommend the best path forward.</p>
-        
-        <div>
-          <h4 className="font-semibold mb-2">Step 1: Get Your Diagnosis</h4>
-          <p>This plan helps you and your doctor find the real, biological reason behind your weight challenges. By analyzing your blood work and health history, we create a clear picture of your body's unique needs.</p>
-        </div>
-        
-        <div>
-          <h4 className="font-semibold mb-2">Step 2: Start Your Personalized Program</h4>
-          <p>After your diagnosis, the next step is to begin a full program tailored to you. This is typically a medically-guided program that may include lifestyle changes and, if appropriate, doctor-prescribed medication to help manage your body's biology for lasting results.</p>
-        </div>
-      </div>
-    )
+    question: "What is Dr. Saptarshi Bhattacharya’s specialization?",
+    answer: "Dr. Saptarshi Bhattacharya specializes in Endocrinology, with expertise in treatments for Type 1 Diabetes Treatment."
   },
   {
     id: 5,
-    question: "Is this plan safe and trustworthy?",
-    answer: "Absolutely. Every part of our plan is designed and overseen by our team of medical experts, including specialist doctors and senior nutritionists. We use only NABL-certified labs for all our tests to ensure the highest standards of accuracy and safety."
+    question: "What are Dr. Saptarshi Bhattacharya’s medical qualifications?",
+    answer: "Dr. Saptarshi Bhattacharya holds prestigious qualifications, including Dr. DM Endocrinology (AIIMS, New Delhi) MD Medicine (MAMC, New Delhi) MBBS (Kolkata Medical College)."
   }
 ];
 

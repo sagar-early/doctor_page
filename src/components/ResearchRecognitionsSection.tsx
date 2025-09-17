@@ -103,14 +103,14 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
     .sort((a, b) => b - a);
 
   return (
-    <section id={id} className="w-full bg-gradient-to-b from-[#faf8f1] to-[#393f2d] py-12 md:py-16">
+    <section id={id} className="w-full bg-[#faf8f1] py-12 md:py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-black mb-2">
             Research & Recognitions
           </h2>
-          <p className="text-lg text-[#DBDFD2] font-medium">
+          <p className="text-lg text-black font-medium">
             Key publications, credentials, and awards by Dr. Saptarshi Bhattacharya
           </p>
         </div>
@@ -135,9 +135,7 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
 
                         {/* Entry Card */}
                         <div className={`w-full md:w-[45%] ${isLeft ? 'md:order-3' : 'md:order-1'}`}>
-                          <div className={`bg-white rounded-xl shadow-lg p-5 border border-[#E4E7DF] relative hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group`}>
-                            {/* Accent Stripe */}
-                            <div className={`absolute top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1 rounded-l-xl ${entry.type === 'publication' ? 'bg-[#4CAF50] group-hover:shadow-lg group-hover:shadow-[#4CAF50]/30' : 'bg-[#FF9800] group-hover:shadow-lg group-hover:shadow-[#FF9800]/30'}`}></div>
+                          <div className={`${entry.type === 'certification' || (entry.type === 'award' && entry.title === 'Best Research Paper in Diabetes Management') ? 'bg-[#C9BDCE]' : 'bg-[#D2F47D]'} rounded-xl shadow-lg p-5 border border-[#E4E7DF] relative hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group`}>
                             
                             <div className="flex items-start gap-4 pl-2">
                               {/* Icon/Logo */}

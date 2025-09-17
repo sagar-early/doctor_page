@@ -109,49 +109,48 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
           </div>
         </div>
 
-        {/* Bottom Hospital Affiliation Bar - Desktop Only */}
-        <div className=" w-full">
-          <div className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20">
-              {doctor.affiliations.map((affiliation, index) => {
-                const shades = ['#939f79', '#abb597', '#dbdfd2']; // New Early green shades
-                const textColors = ['text-white', 'text-white', 'text-[#2C3E50]']; // White text for dark/medium, dark for light
-                const backgroundColor = shades[1];
-                const textColor = textColors[index];
-
-                return (
-                  <div
-                    key={affiliation.hospital}
-                    className="flex  items-center justify-center p-6 "
-                    style={{ backgroundColor }}
-                  >
-                    {/* Hospital logo */}
-                    <div className="">
-                      <div className={`w-10 h-10 rounded-xl overflow-hidden shadow-lg ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
-                        <img
-                          src={logoMap[affiliation.hospital] || affiliation.logo}
-                          alt={`${affiliation.hospital} logo`}
-                          className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain p-2' : 'object-cover'}`}
-                        />
-                      </div>
+        {/* Hospital Affiliations Section - Desktop Only */}
+        <div className="w-full bg-white py-4">
+          <div className="container mx-auto px-6">
+            {/* Heading */}
+            <h3 className="text-center text-lg font-bold text-gray-900 mb-4">
+              Hospital Affiliations
+            </h3>
+            
+            {/* Hospital Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+              {doctor.affiliations.map((affiliation, index) => (
+                <div
+                  key={affiliation.hospital}
+                  className="bg-white rounded-md p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200"
+                >
+                  {/* Hospital Logo */}
+                  <div className="flex justify-center mb-2">
+                    <div className={`w-10 h-10 rounded-md overflow-hidden shadow-sm bg-white p-1 ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
+                      <img
+                        src={logoMap[affiliation.hospital] || affiliation.logo}
+                        alt={`${affiliation.hospital} logo`}
+                        className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain' : 'object-cover'}`}
+                      />
                     </div>
-
-                    {/* Hospital details */}
-                    {/* <div className={`flex-1 text-center md:text-left ${textColor}`}>
-                      <h3 className="font-bold text-lg mb-1">{affiliation.hospital}</h3>
-                      <p className="text-sm mb-2">{affiliation.role}</p>
-                      {affiliation.current && (
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-600 text-white text-xs px-2 py-1 rounded-full"
-                        >
-                          Current
-                        </Badge>
-                      )}
-                    </div> */}
                   </div>
-                );
-              })}
+
+                  {/* Hospital Details */}
+                  <div className="text-center">
+                    <h4 className="font-bold text-gray-900 text-xs mb-1 leading-tight">
+                      {affiliation.hospital}
+                    </h4>
+                    <p className="text-gray-600 text-xs">
+                      {affiliation.role}
+                    </p>
+                    {affiliation.current && (
+                      <Badge className="bg-green-100 text-green-700 text-xs mt-1 px-1.5 py-0.5 rounded-full">
+                        Current
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -195,50 +194,51 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
           </div>
         </div>
 
-        {/* Mobile Affiliations Bar */}
-        <div className="w-full">
-          <div className="w-full">
-            <div className="flex bg-[#abb597] justify-around divide-y divide-white/20">
-              {doctor.affiliations.map((affiliation, index) => {
-                const shades = ['#939f79', '#abb597', '#dbdfd2']; // Early green shades
-                const textColors = ['text-white', 'text-white', 'text-[#2C3E50]']; // White text for dark/medium, dark for light
-                const backgroundColor = shades[index];
-                const textColor = textColors[index];
+         {/* Mobile Hospital Affiliations */}
+         <div className="w-full bg-white py-4">
+           <div className="px-4">
+             {/* Heading */}
+             <h3 className="text-center text-lg font-bold text-gray-900 mb-4">
+               Hospital Affiliations
+             </h3>
+             
+             {/* Hospital Cards Grid - Always 3 columns */}
+             <div className="grid grid-cols-3 gap-2 max-w-2xl mx-auto">
+               {doctor.affiliations.map((affiliation, index) => (
+                 <div
+                   key={affiliation.hospital}
+                   className="bg-white rounded-md p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200"
+                 >
+                   {/* Hospital Logo */}
+                   <div className="flex justify-center mb-1.5">
+                     <div className={`w-8 h-8 rounded-md overflow-hidden shadow-sm bg-white p-0.5 ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
+                       <img
+                         src={logoMap[affiliation.hospital] || affiliation.logo}
+                         alt={`${affiliation.hospital} logo`}
+                         className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain' : 'object-cover'}`}
+                       />
+                     </div>
+                   </div>
 
-                return (
-                  <div
-                    key={affiliation.hospital}
-                    className="flex items-center w-full justify-center p-4 min-h-[120px]"
-                    style={{ backgroundColor }}
-                  >
-                    {/* Hospital logo */}
-                      <div className={`w-16 h-16 rounded-xl overflow-hidden shadow-lg ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
-                        <img
-                          src={logoMap[affiliation.hospital] || affiliation.logo}
-                          alt={`${affiliation.hospital} logo`}
-                          className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain p-2' : 'object-cover'}`}
-                        />
-                      </div>
-
-                    {/* Hospital details */}
-                    {/* <div className={`flex-1 ${textColor}`}>
-                      <h3 className="font-bold text-lg mb-1">{affiliation.hospital}</h3>
-                      <p className="text-sm mb-2">{affiliation.role}</p>
-                      {affiliation.current && (
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-600 text-white text-xs px-2 py-1 rounded-full"
-                        >
-                          Current
-                        </Badge>
-                      )}
-                    </div> */}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+                   {/* Hospital Details */}
+                   <div className="text-center">
+                     <h4 className="font-bold text-gray-900 text-xs mb-0.5 leading-tight">
+                       {affiliation.hospital}
+                     </h4>
+                     <p className="text-gray-600 text-xs">
+                       {affiliation.role}
+                     </p>
+                     {affiliation.current && (
+                       <Badge className="bg-green-100 text-green-700 text-xs mt-0.5 px-1 py-0.5 rounded-full">
+                         Current
+                       </Badge>
+                     )}
+                   </div>
+                 </div>
+               ))}
+             </div>
+           </div>
+         </div>
       </div>
     </section>
   );
