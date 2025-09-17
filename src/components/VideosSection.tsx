@@ -11,8 +11,10 @@ interface VideosSectionProps {
 
 export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +30,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
 
   const handlePause = (videoId: string) => {
     videoRefs.current[videoId]?.pause();
-    videoRefs.current[videoId]?.load(); // Reset video to poster frame
+    //videoRefs.current[videoId]?.load();  Reset video to poster frame
     if (playingVideoId === videoId) {
       setPlayingVideoId(null);
     }
@@ -44,6 +46,26 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
       }
     }
   };
+
+  const handleNextVideo = () => {
+    const length = doctor.videos.length;
+    if (selectedVideoIndex !== null && !isTransitioning) {
+      setIsTransitioning(true);
+      
+      // Fade out
+      setTimeout(() => {
+        const nextIndex = (selectedVideoIndex + 1) % length;
+        setSelectedVideoIndex(nextIndex);
+        setSelectedVideo(doctor.videos[nextIndex]);
+        setPlayingVideoId(null); // Reset playing video state
+        
+        // Fade back in
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 50);
+      }, 150);
+    }
+  }
 
   return (
     <section id={id} className="clinical-card bg-white p-6 md:p-8">
@@ -66,12 +88,12 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
         <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"></div>
 
         {/* Scrollable Video Row */}
-        <div 
+        <div
           ref={carouselRef}
           className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar"
         >
-          {doctor.videos.map((video) => (
-            <div 
+          {doctor.videos.map((video, i) => (
+            <div
               key={video.id}
               className="flex-none w-[320px] snap-start"
               onMouseEnter={() => handlePlay(video.id)}
@@ -79,9 +101,13 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <div 
-                    className="relative w-full h-[568px] rounded-[18px] overflow-hidden bg-black cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out transform hover:scale-[1.02] border border-[#E4E7DF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#939F79] focus-visible:ring-offset-2"
-                    onClick={() => setSelectedVideo(video)}
+                  <div
+                    className="relative w-full h-[568px] rounded-[18px] overflow-hidden bg-transparent cursor-pointer group shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out transform border border-[#E4E7DF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#939F79] focus-visible:ring-offset-2"
+                    onClick={() => {
+                      setSelectedVideo(video)
+                      setSelectedVideoIndex(i);
+                      setIsMuted(true);
+                    }}
                   >
                     <video
                       ref={el => videoRefs.current[video.id] = el}
@@ -90,7 +116,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                       muted={isMuted}
                       playsInline
                       preload="metadata"
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover hover:[scale:1.05] transition-transform duration-200"
                       onLoadedData={(e) => {
                         // Set the current time to 0 to show the first frame
                         e.currentTarget.currentTime = 0;
@@ -107,7 +133,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                           <Play className="h-4 w-4 text-[#2E3523] ml-1" />
                         </div>
                       )}
-                      
+
                       {/* Bottom-Left Disclaimer Text (optional) */}
                       {video.disclaimer && (
                         <div className="absolute bottom-3 left-3 text-white text-[10px] drop-shadow-md max-w-[calc(100%-80px)] overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -123,58 +149,74 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
 
                       {/* Mute/Unmute Icon on Hover (if playing) */}
                       {playingVideoId === video.id && (
-                        <div 
+                        <button
                           className="absolute bottom-3 left-3 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center cursor-pointer"
+                          type="button"
                           onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation(); // Prevent dialog from opening
                             setIsMuted(!isMuted);
                           }}
                         >
                           {isMuted ? (
-                            <VolumeX className="h-4 w-4 text-[#2E3523]" />
+                            <VolumeX className="h-4 w-4 text-[#2E3523] pointer-events-none"
+                            // onClick={(e) => e.stopPropagation()}
+                            />
                           ) : (
-                            <Volume2 className="h-4 w-4 text-[#2E3523]" />
+                            <Volume2 className="h-4 w-4 text-[#2E3523] pointer-events-none"
+                            // onClick={(e) => e.stopPropagation()}
+                            />
                           )}
-                        </div>
+                        </button>
                       )}
                     </div>
                   </div>
                 </DialogTrigger>
-                
-                <DialogContent className="max-w-4xl p-0 max-h-full">
-                  {selectedVideo && (
-                    <div className="relative">
-                      <div className="aspect-video bg-black rounded-t-lg flex items-center justify-center">
+
+                <DialogContent className="p-0 max-h-full max-w-fit">
+                  {selectedVideoIndex !== null && (
+                    <div className="relative flex flex-col">
+                      <div 
+                        className={`aspect-video bg-transparent rounded-t-lg flex flex-col items-center justify-center transition-opacity duration-200 ${
+                          isTransitioning ? 'opacity-0' : 'opacity-100'
+                        }`}
+                      >
                         <video
-                          controls
+                          key={selectedVideoIndex} // Force re-render when video changes
+                          // controls
                           autoPlay
-                          src={selectedVideo.video_url}
-                          poster={selectedVideo.thumbnail}
-                          className="w-full h-full object-contain"
+                          src={doctor?.videos[selectedVideoIndex]?.video_url}
+                          poster={doctor?.videos[selectedVideoIndex]?.thumbnail}
+                          className="h-full max-h-[99vh] object-contain aspect-auto rounded-lg"
                         >
                           Your browser does not support the video tag.
                         </video>
+                        
+                        {/* Video Tags below the video controls */}
+                        {doctor?.videos[selectedVideoIndex]?.tags && (
+                          <div className="absolute bottom-0 bg-black/70 w-full p-4 bg-gray-50 rounded-b-lg">
+                            <div className="flex flex-wrap gap-2">
+                              {doctor.videos[selectedVideoIndex].tags.map((tag: string, tagIndex: number) => (
+                                <Badge 
+                                  key={tagIndex} 
+                                  variant="outline" 
+                                  className="bg-[#E4E7DF] text-[#6B6F66] border border-[#D1D5CC] text-xs"
+                                >
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                       
-                      <div className="p-6">
-                        <h3 className="text-xl font-semibold text-[#2E3523] mb-2">
-                          {selectedVideo.title}
-                        </h3>
-                        <p className="text-[#6B6F66] leading-relaxed">
-                          {selectedVideo.description}
-                        </p>
-                        <div className="flex items-center gap-2 mt-4">
-                          <Badge variant="secondary" className="bg-[#E4E7DF] text-[#6B6F66] border border-[#E4E7DF]">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {selectedVideo.duration}
-                          </Badge>
-                          {selectedVideo.tags && selectedVideo.tags.map((tag: string, tagIndex: number) => (
-                            <Badge key={tagIndex} variant="outline" className="bg-[#E4E7DF] text-[#6B6F66] border border-[#E4E7DF]">{tag}</Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <button className='p-2 rounded-full bg-white/90 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2 transition' onClick={() => setSelectedVideo(null)}>
-                        Next 
+                      <button
+                        onClick={handleNextVideo}
+                        disabled={isTransitioning}
+                        className={`absolute right-3 top-1/2 p-2 rounded-full w-fit bg-white/40 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2 transition ${
+                          isTransitioning ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                      >
+                        <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
                   )}
@@ -185,14 +227,14 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
         </div>
 
         {/* Carousel Navigation Arrows */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 z-20 pointer-events-none"> {/* Adjusted padding */}
-          <button 
+        <div className="absolute lg:hidden top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 z-20 pointer-events-none"> {/* Adjusted padding */}
+          <button
             onClick={() => scrollCarousel('left')}
             className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#434A35] hover:text-[#2E3523] focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2 transition-all duration-200 pointer-events-auto"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button 
+          <button
             onClick={() => scrollCarousel('right')}
             className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-[#434A35] hover:text-[#2E3523] focus:outline-none focus:ring-2 focus:ring-[#939F79] focus:ring-offset-2 transition-all duration-200 pointer-events-auto"
           >
