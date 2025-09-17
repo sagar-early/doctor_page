@@ -14,6 +14,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isDialogVideoMuted, setIsDialogVideoMuted] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -172,11 +173,11 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                   </div>
                 </DialogTrigger>
 
-                <DialogContent className="p-0 max-h-full max-w-fit">
+                <DialogContent className="p-0 max-h-full max-w-auto md:max-w-fit rounded-md">
                   {selectedVideoIndex !== null && (
                     <div className="relative flex flex-col">
                       <div 
-                        className={`aspect-video bg-transparent rounded-t-lg flex flex-col items-center justify-center transition-opacity duration-200 ${
+                        className={`aspect-video bg-transparent rounded-t-md flex flex-col items-center justify-center transition-opacity duration-200 ${
                           isTransitioning ? 'opacity-0' : 'opacity-100'
                         }`}
                       >
@@ -184,12 +185,32 @@ export const VideosSection: React.FC<VideosSectionProps> = ({ id, doctor }) => {
                           key={selectedVideoIndex} // Force re-render when video changes
                           // controls
                           autoPlay
+                          muted={isDialogVideoMuted}
                           src={doctor?.videos[selectedVideoIndex]?.video_url}
                           poster={doctor?.videos[selectedVideoIndex]?.thumbnail}
-                          className="h-full max-h-[99vh] object-contain aspect-auto rounded-lg"
+                          className="min-h-full max-h-[99vh] object-contain aspect-auto rounded-md"
                         >
                           Your browser does not support the video tag.
                         </video>
+
+                        <button
+                          className="absolute bottom-16 left-3 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center cursor-pointer"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent dialog from opening
+                            setIsDialogVideoMuted(!isDialogVideoMuted);
+                          }}
+                        >
+                          {isDialogVideoMuted ? (
+                            <VolumeX className="h-4 w-4 text-[#2E3523] pointer-events-none"
+                            // onClick={(e) => e.stopPropagation()}
+                            />
+                          ) : (
+                            <Volume2 className="h-4 w-4 text-[#2E3523] pointer-events-none"
+                            // onClick={(e) => e.stopPropagation()}
+                            />
+                          )}
+                        </button>
                         
                         {/* Video Tags below the video controls */}
                         {doctor?.videos[selectedVideoIndex]?.tags && (
