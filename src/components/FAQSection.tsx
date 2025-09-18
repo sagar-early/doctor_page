@@ -24,11 +24,11 @@ const faqs: FAQ[] = [
     question: "Why do patients choose Dr. Saptarshi Bhattacharya?",
     answer: "Patients trust Dr. Saptarshi Bhattacharya for he expertise, patient-centric approach, and commitment to providing the highest standard of care. He is well-versed in the latest medical advancements and ensures personalized treatment for every patient."
   },
-  {
-    id: 3,
-    question: "What is Dr. Saptarshi Bhattacharya’s specialization?",
-    answer: "The process is simple and we guide you every step of the way. After your purchase, one of our Care Coordinators will reach out to you on WhatsApp within a few hours to confirm your details and schedule a convenient time for your at-home blood test."
-  },
+  // {
+  //   id: 3,
+  //   question: "What is Dr. Saptarshi Bhattacharya’s specialization?",
+  //   answer: "The process is simple and we guide you every step of the way. After your purchase, one of our Care Coordinators will reach out to you on WhatsApp within a few hours to confirm your details and schedule a convenient time for your at-home blood test."
+  // },
   {
     id: 4,
     question: "What is Dr. Saptarshi Bhattacharya’s specialization?",

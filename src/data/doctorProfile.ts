@@ -14,6 +14,7 @@ export interface DoctorProfile {
     logo: string;
     role: string;
     current: boolean;
+    past?: boolean;
   }>;
   about: string;
   awards: Array<{
@@ -100,15 +101,22 @@ export const drSaptarshiProfile: DoctorProfile = {
       current: true
     },
     {
-      hospital: "eHealth Diabetes & Endicrinology Centre (eDEC)",
-      logo: "/src/assets/eDEC.png",
-      role: "Director",
-      current: false
+      hospital: "MAX",
+      logo: "/src/assets/max_logo.jpg",
+      role: "Director - Endocrinology",
+      current: false,
+      past: true
     },
     {
       hospital: "AIIMS",
       logo: "/src/assets/AIIMS_logo.png",
-      role: "Former Senior Resident",
+      role: "Former Senior Resident(DM - Endocrinology)",
+      current: false
+    },
+    {
+      hospital: "MAMC",
+      logo: "/src/assets/MAMC.png",
+      role: "Former Resident(MD - Medicine)",
       current: false
     }
   ],

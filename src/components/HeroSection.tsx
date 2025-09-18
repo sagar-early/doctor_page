@@ -1,25 +1,15 @@
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Calendar, Globe, Award } from 'lucide-react';
 import { DoctorProfile } from '@/data/doctorProfile';
 import drSaptarshiImage from '@/assets/doctor1.png';
 import portraitHeroImage from '@/assets/potrait_hero.png';
 import officeBackground from '@/assets/background_image.png'; // Add your image here
-import aiims from '@/assets/AIIMS_logo.png';
-import maxHealthcare from '@/assets/max_logo.jpg';
-import fortis from '@/assets/fortis_logo.png';
 
 interface HeroSectionProps {
   doctor: DoctorProfile;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
-  const logoMap: { [key: string]: string } = {
-    'AIIMS': aiims,
-    'Max Healthcare': maxHealthcare,
-    'Fortis Healthcare': fortis,
-  };
 
   return (
     <section className="relative overflow-hidden w-full ">
@@ -118,7 +108,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
             </h3> */}
             
             {/* Hospital Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
               {doctor.affiliations.map((affiliation, index) => (
                 <div
                   key={affiliation.hospital}
@@ -126,9 +116,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                 >
                   {/* Hospital Logo */}
                   <div className="flex justify-center mb-2">
-                    <div className={`w-10 h-10 rounded-md overflow-hidden shadow-sm bg-white p-1 ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
+                    <div className={`w-16 h-16 rounded-md overflow-hidden shadow-sm bg-white p-1 ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
                       <img
-                        src={logoMap[affiliation.hospital] || affiliation.logo}
+                        src={affiliation.logo}
                         alt={`${affiliation.hospital} logo`}
                         className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain' : 'object-cover'}`}
                       />
@@ -146,6 +136,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                     {affiliation.current && (
                       <Badge className="bg-green-100 text-green-700 text-xs mt-1 px-1.5 py-0.5 rounded-full">
                         Current
+                      </Badge>
+                    )}
+                    {affiliation?.past && (
+                      <Badge className="bg-orange-100 text-orange-400 text-xs mt-1 px-1.5 py-0.5 rounded-full">
+                        Past
                       </Badge>
                     )}
                   </div>
@@ -174,13 +169,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
           <div className="absolute inset-0 bg-black/60 z-0"></div>
           <div className="flex-1 flex flex-col justify-center z-10">
             {/* Doctor Name */}
-            <h1 className="text-white text-3xl md:text-4xl font-bold mb-4 leading-tight text-left">
-              {doctor.name}
+            <h1 className="text-white text-xl md:text-4xl font-bold mb-4 leading-tight text-left">
+              {doctor.name.toUpperCase()}
             </h1>
 
             {/* Doctor Title */}
-            <p className="text-white text-lg mb-6 text-left opacity-90">
-              {doctor.title}
+            <p className="text-white text-md mb-6 text-left opacity-90" style={{ color: '#efd7b5' }}>
+              {doctor.title?.toUpperCase()}
             </p>
           </div>
 
@@ -203,17 +198,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
              </h3> */}
              
              {/* Hospital Cards Grid - Always 3 columns */}
-             <div className="grid grid-cols-3 gap-2 max-w-2xl mx-auto">
+             <div className="grid grid-cols-2 gap-2 max-w-2xl mx-auto">
                {doctor.affiliations.map((affiliation, index) => (
                  <div
                    key={affiliation.hospital}
-                   className="bg-white rounded-md p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200"
+                   className="bg-white min-h-36 rounded-md p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200"
                  >
                    {/* Hospital Logo */}
                    <div className="flex justify-center mb-1.5">
                      <div className={`w-8 h-8 rounded-md overflow-hidden shadow-sm bg-white p-0.5 ${affiliation.hospital === 'Fortis Healthcare' ? 'bg-white' : ''}`}>
                        <img
-                         src={logoMap[affiliation.hospital] || affiliation.logo}
+                         src={affiliation.logo}
                          alt={`${affiliation.hospital} logo`}
                          className={`w-full h-full ${affiliation.hospital === 'Fortis Healthcare' ? 'object-contain' : 'object-cover'}`}
                        />
@@ -233,6 +228,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ doctor }) => {
                          Current
                        </Badge>
                      )}
+                     {affiliation.past && (
+                      <Badge className="bg-orange-100 text-orange-400 text-xs mt-1 px-1.5 py-0.5 rounded-full">
+                        Past
+                      </Badge>
+                    )}
                    </div>
                  </div>
                ))}

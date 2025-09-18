@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Calendar, Stethoscope, BookOpen, Users } from 'lucide-react';
+import { Calendar, Stethoscope, BookOpen, Users } from 'lucide-react';
 import { DoctorProfile } from '@/data/doctorProfile';
 
 interface AboutSectionProps {
@@ -55,7 +55,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ id, doctor }) => {
 
       {/* Short intro */}
       <p className="text-lg text-foreground mb-8 font-medium">
-        A senior endocrinologist committed to delivering evidence-based, compassionate care with a focus on patient education and long-term outcomes.
+        Dr. Saptarshi Bhattacharya is a highly experienced endocrinologist, currently consulting at Apollo Hospitals (Delhi), and previously at Max Super Speciality Hospitals (Delhi). He did his residency in AIIMS (DM in Endocrinology) and Maulana Azad Medical College (MD). He is a Fellow of the American College of Endocrinology, and has received accolades for authoring 120+ research publications in diabetes, thyroid disorders, PCOS, and metabolic syndromes. As Early’s Director of Medicine, he architects our clinical protocols that combine advanced diagnostics, individualized drug titration, and coordinated multidisciplinary support—all anchored in compassionate, patient-first care. His leadership in various endocrine societies, 20+ years of experience and academic credentials ensure that Early delivers medical oversight that is rigorous, safe, and built to scale.
       </p>
 
       {/* Card Grid */}

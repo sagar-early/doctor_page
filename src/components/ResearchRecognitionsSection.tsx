@@ -45,15 +45,15 @@ export const ResearchRecognitionsSection: React.FC<ResearchRecognitionsSectionPr
       url: '#'
     },
     // 2022 Publications and Awards
-    {
-      year: 2022,
-      type: 'publication',
-      title: 'Metabolic Syndrome Management in Urban India: Challenges and Solutions',
-      subtitle: 'Review • Metabolism',
-      source: 'Diabetes Care India • 2022',
-      citation: 'Bhattacharya, S. (2022). Metabolic Syndrome Management in Urban India: Challenges and Solutions. Diabetes Care India, 15(2), 89-96.',
-      url: '#'
-    },
+    // {
+    //   year: 2022,
+    //   type: 'publication',
+    //   title: 'Metabolic Syndrome Management in Urban India: Challenges and Solutions',
+    //   subtitle: 'Review • Metabolism',
+    //   source: 'Diabetes Care India • 2022',
+    //   citation: 'Bhattacharya, S. (2022). Metabolic Syndrome Management in Urban India: Challenges and Solutions. Diabetes Care India, 15(2), 89-96.',
+    //   url: '#'
+    // },
     {
       year: 2022,
       type: 'award',
